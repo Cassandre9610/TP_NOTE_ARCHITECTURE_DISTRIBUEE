@@ -15,9 +15,10 @@ schedule = ObjectType('Schedule')
 query = QueryType()
 query.set_field("booking_with_userid", r.get_booking_with_userid)
 
-#mutation = MutationType()
+mutation = MutationType()
+mutation.set_field("add_booking", r.add_booking)
 
-schema = make_executable_schema(type_defs, query, booking, schedule)
+schema = make_executable_schema(type_defs, query, mutation, booking, schedule)
 
 
 # root message

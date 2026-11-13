@@ -12,3 +12,6 @@ type Query {
     booking_with_userid(_userid:String!): Booking
 }
 
+type Mutation {
+    add_booking(_userid:String!, _date:String!, _movies_id:[String]): Booking
+}
