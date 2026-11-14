@@ -1,6 +1,15 @@
-FROM python:3.8-alpine
+FROM python:3.15.2-alpine
+
 WORKDIR /app
-COPY requirements.txt /app
+
+# copy the requirements file in the workdir
+COPY requirements.txt /app/
+
+# install the Python requirements
 RUN pip install -r requirements.txt
-ADD . /app/
-CMD ["python","-u","booking.py"]
+
+# copy the app files and directories
+COPY booking/ /app/
+
+# start movie.py when the container is started
+CMD  ["pymon", "booking.py"]
