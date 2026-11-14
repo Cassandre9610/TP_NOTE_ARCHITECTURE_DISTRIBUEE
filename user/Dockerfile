@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 COPY user/ /app/
 
 # start movie.py when the container is started
-CMD  ["pymon", "user.py"]
+CMD  ["python3", "user.py"]

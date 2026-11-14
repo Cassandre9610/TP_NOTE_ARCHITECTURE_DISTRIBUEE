@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 COPY booking/ /app/
 
 # start movie.py when the container is started
-CMD  ["pymon", "booking.py"]
+CMD  ["python3", "booking.py"]

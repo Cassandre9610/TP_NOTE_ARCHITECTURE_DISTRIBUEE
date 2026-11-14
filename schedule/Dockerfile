@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt
 COPY schedule/ /app/
 
 # start movie.py when the container is started
-CMD ["pymon", "schedule.py"]
+CMD ["python3", "schedule.py"]
