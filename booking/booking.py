@@ -17,6 +17,7 @@ query.set_field("booking_with_userid", r.get_booking_with_userid)
 
 mutation = MutationType()
 mutation.set_field("add_booking", r.add_booking)
+mutation.set_field("delete_booking", r.delete_booking)
 
 schema = make_executable_schema(type_defs, query, mutation, booking, schedule)
 

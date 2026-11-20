@@ -1,4 +1,5 @@
 import json
+from graphql import GraphQLError
 
 DATA_PATH = '{}/data/bookings.json'.format(".")
 
@@ -51,8 +52,18 @@ def add_booking(_, info, _userid: str, _date: str, _movie_id: str):
 
 
 def delete_booking(_, info, _userid: str, _date: str, _movie_id: str):
-    pass
-
+    with open(DATA_PATH, "r") as file:
+        bookings: list = json.load(file)["bookings"]
+        for booking in bookings:
+            if booking["userid"] == _userid:
+                for date in booking["dates"]:
+                    if date["date"] == _date:
+                        date["movies"] = [movie for movie in date["movies"] if movie != _movie_id]
+                        #TODO check si la liste des films a changée
+                        _write({"bookings": bookings})
+                        return booking
+            
+    raise GraphQLError("aucune donnée à supprimer")
 
 def create_new_booking(bookings:list, _userid, _date, _movie_id):
     new_booking = {
