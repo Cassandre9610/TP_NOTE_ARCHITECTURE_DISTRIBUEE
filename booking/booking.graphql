@@ -13,5 +13,6 @@ type Query {
 }
 
 type Mutation {
-    add_booking(_userid:String!, _date:String!, _movies_id:[String]): Booking
+    add_booking(_userid:String!, _date:String!, _movie_id:String!): Booking
+    delete_booking(_userid:String!, _date:String!, _movie_id:String!): Booking
 }

@@ -16,7 +16,9 @@ def get_booking_with_userid(_, info, _userid):
                 return booking
 
 
-def add_booking(_, info, _userid: str, _date: str, _movies_id: list): 
+#TODO refactor
+#TODO appels à schedule pour vérifier si le film est diffusé dans la date
+def add_booking(_, info, _userid: str, _date: str, _movie_id: str): 
     with open(DATA_PATH, "r") as file:
         bookings: list = json.load(file)["bookings"]
         id_existing_booking = -1
@@ -35,24 +37,29 @@ def add_booking(_, info, _userid: str, _date: str, _movies_id: list):
 
             if i_existing_date != -1:
                 existing_date: list = existing_booking["dates"][i_existing_date]
-                for id in _movies_id:
-                    if id not in existing_date["movies"]:
-                        existing_date["movies"].append(id)
+                
+                if _movie_id not in existing_date["movies"]:
+                    existing_date["movies"].append(_movie_id)
+                #TODO else throw error
             else:
-                existing_booking["dates"].append({"date":_date, "movies": _movies_id})
+                existing_booking["dates"].append({"date":_date, "movies": _movie_id})
 
             _write({"bookings" : bookings})
             return existing_booking
         else :
-            return create_new_booking(bookings, _userid, _date, _movies_id)
+            return create_new_booking(bookings, _userid, _date, _movie_id)
 
 
-def create_new_booking(bookings:list, _userid, _date, _movies_id):
+def delete_booking(_, info, _userid: str, _date: str, _movie_id: str):
+    pass
+
+
+def create_new_booking(bookings:list, _userid, _date, _movie_id):
     new_booking = {
         "userid": _userid,
         "dates": [{
             "date": _date,
-            "movies": _movies_id
+            "movies": [_movie_id]
         }]
     }
 
