@@ -4,13 +4,17 @@ service Schedule {
     rpc GetSchedule(Empty) returns (Schedules) {}
     rpc CreateSchedule(NewSchedule) returns (Day) {}
     rpc GetScheduleByDate(Date) returns (Day) {}
-    rpc GetScheduleByMovieId(MovieID) returns (Schedules) {}
+    rpc GetDatesByMovieId(MovieID) returns (Dates) {}
     rpc DeleteScheduleByDate(Date) returns (Day) {}
     rpc DeleteMovieFromDate(NewSchedule) returns (Day) {}
 }
 
 message Date {
     string date = 1;
+}
+
+message Dates {
+    repeated string date = 1;
 }
 
 message NewSchedule {
